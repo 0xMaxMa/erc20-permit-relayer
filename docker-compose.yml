@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14
+    restart: always
+    container_name: 'postgres'
+    command: postgres -c 'max_connections=200'
+    environment:
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_DB: 'relayer_db'
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  
+  # relayer: 
+  #   build: .
+  #   restart: always
+  #   container_name: 'relayer'
+  #   depends_on:
+  #     - db    
+  #   command: [ "sh", "./entrypoint" ]
+  #   volumes:
+  #     - $PWD:/data
