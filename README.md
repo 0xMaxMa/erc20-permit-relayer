@@ -19,12 +19,10 @@ Require go version >= 1.19
 Git clone: `git clone https://github.com/0xMaxMa/erc20-permit-relayer.git`
 
 Prerequirement:
-1. Postgres database server or start local with docker compose: 
-`cd postgres`
-
-`docker compose up -d`
-
-1. Generate account keystore with unlock password for sign transactions, [read more](https://geth.ethereum.org/docs/getting-started#generating-accounts)
+1. Run Postgres database server or start on local with docker compose: 
+- `cd postgres`
+- `docker compose up -d`
+2. Generate account keystore with unlock password for sign transactions, [read more](https://geth.ethereum.org/docs/getting-started#generating-accounts)
 
 Local Run:
 1. Configure in: `config.toml`
@@ -35,7 +33,7 @@ Building the source:
 1. Build: `make relayer` 
 1. Run Relayer: `./build/bin/relayer --config ./config.toml`
 
-Docker compose:
+Run with Docker compose:
 1. Configure in: `config-docker-compose.toml`
 1. Start docker compose: `docker compose up -d`
 1. View logs: `docker compose logs -f`
