@@ -1,0 +1,31 @@
+network_id = 11155111
+rpc_endpoint = "https://ethereum-sepolia.blockpi.network/v1/rpc/public"
+proxy_port = "8545"
+erc20_permit_token_name = "Digital10kToken"
+erc20_permit_token_address = "0xFF2F0676e588bdCA786eBF25d55362d4488Fad64"
+deadline_minimum = 7776000 # 90 days
+log_debug = true
+
+[signer]
+enable = true
+keystore_file_path = "./.keystore"
+password = "unlock_password"
+gas_price = 5000000000 # 5 gwei
+gas_limit = 3000000
+sender_interval = 60000 # 60 secs
+sender_bulk_size = 50 # txs
+
+[keeper]
+enable = true
+instance_id = "dev"
+initial_sync_block_number = 4353360
+block_batch_limit = 20
+syncing_interval = 100
+latest_interval = 1500
+
+[db]
+host = "localhost"
+port = 5432
+user = "postgres"
+password = "password"
+database = "relayer_db"

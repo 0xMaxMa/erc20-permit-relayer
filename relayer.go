@@ -3,6 +3,8 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"os"
+	"strconv"
 	"sync"
 
 	"erc20-permit-relayer/common"
@@ -51,13 +53,21 @@ func main() {
 	// Startup
 	log = log15.New()
 	log.Info("🧙 ERC20 Permit Relayer RPC", "  🔑", "⛓️")
+
+	// Load config
+	config, err := LoadConfig()
+	if err != nil {
+		log.Error("Cannot to load config.toml file", "msg", err)
+		os.Exit(1)
+	}
+
 	log.Info("Proxy listening", "port", config.ProxyPort)
 	log.Info("Connect rpc endpoint", "endpoint", config.RpcEndpoint)
-	log.Info("Connect database", "postgres", config.Db.User+"@"+config.Db.Host+":"+config.Db.Port, "db", config.Db.Dbname)
+	log.Info("Connect database", "postgres", config.Db.User+"@"+config.Db.Host+":"+strconv.Itoa(int(config.Db.Port)), "db", config.Db.Dbname)
 
 	// Database
-	txStore = *store.NewTxStore(&config, &log)
-	err := txStore.Connect()
+	txStore = *store.NewTxStore(config, &log)
+	err = txStore.Connect()
 	if err != nil {
 		log.Error("Failed to connect database", "error", err)
 		return
@@ -72,7 +82,7 @@ func main() {
 	}
 
 	// Signer
-	signer = *core.NewSigner(&config, &log, &txStore, client, &wg)
+	signer = *core.NewSigner(config, &log, &txStore, client, &wg)
 
 	// Start Transaction Sender
 	if config.Signer.Enable {
@@ -83,7 +93,7 @@ func main() {
 	}
 
 	// Process request
-	processRequest = *core.NewProcessRequest(&config, &log, &txStore, &signer)
+	processRequest = *core.NewProcessRequest(config, &log, &txStore, &signer)
 
 	// Proxy http
 	http.HandleFunc("/", handleRPCRequest)
@@ -100,7 +110,7 @@ func main() {
 	}()
 
 	// Keeper
-	keeper = *core.NewKeeper(&config, &log, &txStore, client, &wg)
+	keeper = *core.NewKeeper(config, &log, &txStore, client, &wg)
 
 	// Start Transaction Keeper sync
 	if config.Keeper.Enable {

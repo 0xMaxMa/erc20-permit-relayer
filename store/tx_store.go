@@ -41,7 +41,7 @@ func NewTxStore(config *common.Config, log *log15.Logger) *TxStore {
 
 func (t *TxStore) Connect() error {
 	// Connect to the PostgreSQL database
-	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		t.config.Db.Host, t.config.Db.Port, t.config.Db.User, t.config.Db.Password, t.config.Db.Dbname)
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
