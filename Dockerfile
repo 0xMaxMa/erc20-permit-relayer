@@ -16,4 +16,6 @@ RUN apt-get update && \
 WORKDIR /app
 
 COPY --from=relayer /app/build/bin/relayer ./
-COPY entrypoint .
+COPY entrypoint.sh .
+
+ENTRYPOINT ["/app/entrypoint.sh"]
