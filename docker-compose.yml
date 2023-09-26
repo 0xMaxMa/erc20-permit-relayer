@@ -23,5 +23,7 @@ services:
       - db
     volumes:
       - $PWD:/data
+    ports:
+      - 8545:8545
     command: |
       --config=/data/config-docker-compose.toml
