@@ -23,13 +23,13 @@ Prerequirement:
 1. Generate account keystore with unlock password for sign transactions, [read more](https://geth.ethereum.org/docs/getting-started#generating-accounts)
 
 Local Run:
-1. Configure in: `config.go`
-1. Run Relayer: `go run .`
+1. Configure in: `config.toml`
+1. Run Relayer: `go run . --config ./config.toml`
 
 Building the source:
 
 1. Build: `make relayer` 
-1. Run Relayer: `./build/bin/relayer`
+1. Run Relayer: `./build/bin/relayer --config ./config.toml`
 
 ## Related
 ERC20Permit Contract: [https://github.com/0xMaxMa/digital10k-contracts.git](https://github.com/0xMaxMa/digital10k-contracts.git)

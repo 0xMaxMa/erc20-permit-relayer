@@ -19,7 +19,7 @@ var (
 
 type DatabaseConnection struct {
 	Host     string
-	Port     string
+	Port     int64
 	User     string
 	Password string
 	Dbname   string
