@@ -8,7 +8,7 @@ log_debug = true
 
 [signer]
 enable = true
-keystore_file_path = "./.keystore"
+keystore_file_path = "/data/.keystore"
 password = "unlock_password"
 gas_price = 5000000000 # 5 gwei
 gas_limit = 3000000
@@ -26,7 +26,7 @@ syncing_interval = 100 # 100 ms
 latest_interval = 1500 # 1.5 s
 
 [db]
-host = "localhost"
+host = "db"
 port = 5432
 user = "postgres"
 password = "password"

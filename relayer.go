@@ -55,7 +55,7 @@ func main() {
 	log.Info("🧙 ERC20 Permit Relayer RPC", "  🔑", "⛓️")
 
 	// Load config
-	config, err := LoadConfig()
+	config, err := common.LoadConfig()
 	if err != nil {
 		log.Error("Cannot to load config.toml file", "msg", err)
 		os.Exit(1)

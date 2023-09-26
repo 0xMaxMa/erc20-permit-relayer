@@ -11,17 +11,6 @@ services:
       POSTGRES_USER: 'postgres'
       POSTGRES_DB: 'relayer_db'
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - ../postgres-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-  
-  relayer: 
-    build: .
-    restart: always
-    container_name: 'relayer'
-    depends_on:
-      - db
-    volumes:
-      - $PWD:/data
-    command: |
-      --config=/data/config-docker-compose.toml
